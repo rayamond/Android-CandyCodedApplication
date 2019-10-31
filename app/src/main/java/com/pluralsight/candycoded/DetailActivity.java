@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,6 +21,16 @@ public class DetailActivity extends AppCompatActivity {
     public static final String SHARE_DESCRIPTION = "Look at this delicious candy from Candy Coded - ";
     public static final String HASHTAG_CANDYCODED = " #candycoded";
     String mCandyImageUrl = "";
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent createShareTntent = new Intent(Intent.ACTION_SEND);
+        createShareTntent.setType("text/plain");
+
+        createShareTntent.putExtra(Intent.EXTRA_TEXT, SHARE_DESCRIPTION + mCandyImageUrl + HASHTAG_CANDYCODED);
+        startActivity(createShareTntent);
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
